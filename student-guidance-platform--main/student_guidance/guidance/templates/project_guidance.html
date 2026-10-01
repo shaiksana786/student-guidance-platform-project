@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+
+{% block title %}Project Guidance - Student Guidance Platform{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Project Guidance</h1>
+    <p>A comprehensive guide to building minor and major projects</p>
+</div>
+
+<!-- Section 1: What is a Project -->
+<div class="section">
+    <h2>What is a Project?</h2>
+    <p>
+        A project is a practical implementation of your coding and technical knowledge to solve a real-world problem
+        or create a complete software application. Projects are essential for:
+    </p>
+    <ul class="bullet-list">
+        <li>Applying theoretical concepts in practical scenarios</li>
+        <li>Building a strong portfolio for placements and interviews</li>
+        <li>Gaining hands-on experience with industry tools</li>
+        <li>Understanding full software development lifecycle</li>
+        <li>Demonstrating your capabilities to employers</li>
+    </ul>
+</div>
+
+<!-- Section 2: Minor vs Major Projects -->
+<div class="section">
+    <h2>Minor Projects</h2>
+    <h3>What is it?</h3>
+    <p>A small-scale project that can be completed in 2-4 weeks with limited scope.</p>
+    
+    <h3>What it Contains:</h3>
+    <ul class="bullet-list">
+        <li>Simple problem statement</li>
+        <li>Basic logic and algorithms</li>
+        <li>Limited number of features (3-5)</li>
+        <li>Usually single programming language</li>
+        <li>Simple or no database</li>
+        <li>Minimal user interface</li>
+    </ul>
+
+    <h3 style="margin-top: 2rem;">Examples:</h3>
+    <p>Calculator App • Todo List • Student Management System • Quiz Application • Attendance Tracker</p>
+</div>
+
+<div class="section">
+    <h2>Major Projects</h2>
+    <h3>What is it?</h3>
+    <p>A large-scale project that takes 2-3 months with complex requirements and real-world applicability.</p>
+    
+    <h3>What it Contains:</h3>
+    <ul class="bullet-list">
+        <li>Real-world problem or business requirement</li>
+        <li>Frontend + Backend architecture</li>
+        <li>Database design (SQL or NoSQL)</li>
+        <li>Authentication and authorization</li>
+        <li>Multiple modules and features (10+)</li>
+        <li>API integrations</li>
+        <li>Deployment and hosting</li>
+        <li>Documentation and testing</li>
+    </ul>
+
+    <h3 style="margin-top: 2rem;">Examples:</h3>
+    <p>E-commerce Platform • Social Media App • Online Learning Portal • Job Portal • Chat Application</p>
+</div>
+
+<!-- Section 3: Comparison Table -->
+<div class="section">
+    <h2>Minor vs Major Project Comparison</h2>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Minor Project</th>
+                    <th>Major Project</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Duration</strong></td>
+                    <td>2-4 weeks</td>
+                    <td>2-3 months</td>
+                </tr>
+                <tr>
+                    <td><strong>Team Size</strong></td>
+                    <td>1-2 members</td>
+                    <td>2-4 members</td>
+                </tr>
+                <tr>
+                    <td><strong>Features</strong></td>
+                    <td>3-5 basic features</td>
+                    <td>10+ advanced features</td>
+                </tr>
+                <tr>
+                    <td><strong>Database</strong></td>
+                    <td>Optional/Simple</td>
+                    <td>Required/Complex</td>
+                </tr>
+                <tr>
+                    <td><strong>Frontend</strong></td>
+                    <td>Simple or CLI</td>
+                    <td>Full UI/UX Design</td>
+                </tr>
+                <tr>
+                    <td><strong>Deployment</strong></td>
+                    <td>Local/Simple hosting</td>
+                    <td>Production server</td>
+                </tr>
+                <tr>
+                    <td><strong>Resume Value</strong></td>
+                    <td>Good</td>
+                    <td>Excellent</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Section 4: Code Platforms -->
+<div class="section">
+    <h2>Code Platforms & Tools</h2>
+    
+    <h3>Code Editors (Multi-language)</h3>
+    <div class="cards-grid">
+        {% for editor in code_editors %}
+        <div class="card">
+            <h4>{{ editor.name }}</h4>
+            <p>{{ editor.type }}</p>
+            <a href="{{ editor.url }}" target="_blank" class="card-link">Visit →</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h3 style="margin-top: 2rem;">Language-Specific IDEs</h3>
+    <div class="cards-grid">
+        {% for item in language_ides %}
+        <div class="card">
+            <h4>{{ item.language }}</h4>
+            <p>{{ item.ide }}</p>
+            <a href="{{ item.url }}" target="_blank" class="card-link">Download →</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Section 5: Deployment Platforms -->
+<div class="section">
+    <h2>Deployment Platforms</h2>
+    <p>Once your project is complete, deploy it on these platforms to make it accessible online:</p>
+    
+    <div class="cards-grid">
+        {% for platform in deployment_platforms %}
+        <div class="card">
+            <h4>{{ platform.name }}</h4>
+            <p><strong>Type:</strong> {{ platform.type }}</p>
+            <a href="{{ platform.url }}" target="_blank" class="card-link">Visit Platform →</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Section 6: When to Start Projects -->
+<div class="section">
+    <h2>When to Start Projects - Timeline</h2>
+    
+    <div class="timeline">
+        {% for item in timeline %}
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <h4>{{ item.year }}</h4>
+                <p>{{ item.description }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Section 7: Project Flow Diagram -->
+<div class="section">
+    <h2>Step-by-Step Project Flow Diagram</h2>
+    <p>Follow this systematic approach for every project:</p>
+    
+    <div class="flow-diagram">
+        <div class="flow-box">📌 Problem Selection</div>
+        <div class="flow-box">📊 Requirement Analysis</div>
+        <div class="flow-box">🔧 Choose Language & Framework</div>
+        <div class="flow-box">💻 Select Code Platform/IDE</div>
+        <div class="flow-box">✍️ Start Coding</div>
+        <div class="flow-box">🧪 Testing & Debugging</div>
+        <div class="flow-box">🚀 Deployment</div>
+        <div class="flow-box">🌍 Real-World Use</div>
+    </div>
+</div>
+
+<!-- Project Tips -->
+<div class="section" style="background: linear-gradient(135deg, var(--light-blue) 0%, rgba(219, 234, 254, 0.3) 100%); border-left: 4px solid var(--primary-blue);">
+    <h3>💡 Project Development Tips</h3>
+    <ul class="bullet-list">
+        <li>Start with problem analysis - understand what you need to build</li>
+        <li>Use version control (Git/GitHub) from day one</li>
+        <li>Write clean, readable, and documented code</li>
+        <li>Test your code regularly during development</li>
+        <li>Get feedback from peers and mentors</li>
+        <li>Deploy early and iterate based on feedback</li>
+        <li>Document your project with README, setup instructions, and usage guide</li>
+        <li>Host on GitHub and create a portfolio</li>
+    </ul>
+</div>
+{% endblock %}

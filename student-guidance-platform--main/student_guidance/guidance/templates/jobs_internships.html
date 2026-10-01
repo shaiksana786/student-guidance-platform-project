@@ -1,0 +1,422 @@
+{% extends 'base.html' %}
+
+{% block title %}Jobs & Internships - Student Guidance Platform{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1> Jobs & Internships</h1>
+    <p>Your complete guide to finding internships and landing your dream job</p>
+</div>
+
+<!-- Section 1: Career Goal Selection -->
+<div class="section">
+    <h2>Career Goal Selection</h2>
+    <p>Explore 26 career paths in Software & Hardware Engineering. Click any career to see detailed information.</p>
+    
+    <div style="margin: 2rem 0; display: flex; gap: 1rem; flex-wrap: wrap;">
+        <button class="filter-btn active" onclick="filterCareers('all')" style="padding: 0.75rem 1.5rem; border: 2px solid var(--primary-blue); border-radius: 6px; background: var(--primary-blue); color: white; cursor: pointer; font-weight: 600;">
+            All Careers (26)
+        </button>
+        <button class="filter-btn" onclick="filterCareers('Software')" style="padding: 0.75rem 1.5rem; border: 2px solid var(--primary-blue); border-radius: 6px; background: white; color: var(--primary-blue); cursor: pointer; font-weight: 600;">
+            Software Careers (15)
+        </button>
+        <button class="filter-btn" onclick="filterCareers('Hardware')" style="padding: 0.75rem 1.5rem; border: 2px solid var(--primary-blue); border-radius: 6px; background: white; color: var(--primary-blue); cursor: pointer; font-weight: 600;">
+            Hardware Careers (11)
+        </button>
+    </div>
+
+    <div class="cards-grid" id="careerGrid">
+        {% for option in career_options %}
+        <div class="career-card" data-career="{{ option.id }}" data-category="{{ option.category }}" onclick="showCareerDetails(this)" style="cursor: pointer; transition: all 0.3s; border: 2px solid transparent;">
+            <h4 style="color: var(--primary-blue); margin-bottom: 0.5rem;">{{ option.title }}</h4>
+            <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.5rem;">
+                <strong>Category:</strong> {{ option.category }} | <strong>Package:</strong> {{ option.package }}
+            </p>
+            <p style="font-size: 0.85rem; color: var(--text-light);">Click to view details →</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Career Details Modal -->
+    <div id="careerDetailsModal" style="display: none; margin-top: 2rem; padding: 2rem; background: linear-gradient(135deg, var(--light-blue) 0%, rgba(219, 234, 254, 0.3) 100%); border-radius: 12px; border: 2px solid var(--primary-blue);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h3 id="careerTitle" style="color: var(--dark-blue); font-size: 1.8rem;"></h3>
+            <button onclick="closeCareerDetails()" style="background: var(--danger); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 600;">✕ Close</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div>
+                <h4 style="color: var(--primary-blue); margin-bottom: 0.75rem;">📊 Career Info</h4>
+                <p><strong>Package Range:</strong> <span id="careerPackage"></span></p>
+                <p style="margin-top: 1rem;"><strong>Description:</strong> <span id="careerDescription"></span></p>
+                <p style="margin-top: 1rem;"><strong>Job Roles:</strong></p>
+                <ul id="careerRoles" style="margin-left: 1.5rem; font-size: 0.9rem;"></ul>
+                <p style="margin-top: 1rem;"><strong>Top Companies Hiring:</strong></p>
+                <ul id="careerCompanies" style="margin-left: 1.5rem; font-size: 0.9rem;"></ul>
+            </div>
+            
+            <div>
+                <h4 style="color: var(--primary-blue); margin-bottom: 0.75rem;">🛠️ Skills & Tools</h4>
+                <p style="margin-bottom: 1rem;"><strong>Required Skills:</strong></p>
+                <div id="careerSkills" style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.5rem;"></div>
+                
+                <p><strong>Tools & Technologies:</strong></p>
+                <div id="careerTools" style="display: flex; flex-wrap: wrap; gap: 0.75rem;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section 2: Career Paths -->
+<div class="section">
+    <h2>Popular Career Paths (2024-2025)</h2>
+    <p>Choose a specialization and follow the roadmap to become job-ready:</p>
+    
+    <div class="cards-grid">
+        {% for path in career_paths %}
+        <div class="card" style="border: 2px solid var(--primary-blue);">
+            <h4 style="color: var(--primary-blue); margin-bottom: 0.5rem;">{{ path.name }}</h4>
+            <p style="font-size: 0.85rem; margin: 0.5rem 0;"><strong>Duration:</strong> {{ path.duration }}</p>
+            <p style="font-size: 0.85rem; margin: 0.5rem 0;"><strong>Avg Package:</strong> {{ path.avg_package }}</p>
+            <p style="font-size: 0.85rem; margin: 0.5rem 0;"><strong>Level:</strong> {{ path.difficulty }}</p>
+            <p style="font-size: 0.8rem; color: var(--text-light); margin: 0.75rem 0;"><strong>Skills:</strong> {{ path.skills_needed|join:", " }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Section 3: Internship Platforms -->
+<div class="section">
+    <h2>Internship Platforms (Free)</h2>
+    <p>Find and apply for internships on these trusted platforms:</p>
+    
+    <div class="cards-grid">
+        {% for platform in internship_platforms %}
+        <div class="card">
+            <h4>{{ platform.name }}</h4>
+            <a href="{{ platform.url }}" target="_blank" class="card-link">Visit Platform →</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h3 style="margin-top: 2rem;">What to Look For in Internships:</h3>
+    <ul class="bullet-list">
+        <li>Companies with good learning environment</li>
+        <li>Relevant tech stack matching your interests</li>
+        <li>Good internship stipend/allowance</li>
+        <li>Mentorship opportunities</li>
+        <li>Possibility of full-time offer after internship</li>
+        <li>Remote or office location based on your preference</li>
+        <li>Certificate and LOR (Letter of Recommendation)</li>
+    </ul>
+</div>
+
+<!-- Section 3: 4-Year Roadmap -->
+<div class="section">
+    <h2>4-Year Career Roadmap - Semester-wise Skill Progression</h2>
+    <p>Follow this roadmap to be job-ready by the time you graduate:</p>
+    
+    <div class="roadmap-container">
+        {% for item in semester_roadmap %}
+        <div class="roadmap-section">
+            <h3>Semester {{ item.semester }} - {{ item.focus }}</h3>
+            <div class="roadmap-skills">
+                {% for skill in item.skills %}
+                <div class="skill-badge">{{ skill }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h3 style="margin-top: 2rem;">Additional Activities by Year:</h3>
+    <ul class="bullet-list">
+        <li><strong>1st Year:</strong> Learn fundamentals, participate in contests, build resume foundation</li>
+        <li><strong>2nd Year:</strong> Complete 1-2 internships, build projects, gain practical experience</li>
+        <li><strong>3rd Year:</strong> Focus on specialized skills, larger internships, enhance portfolio</li>
+        <li><strong>4th Year:</strong> Final internship, prepare for placements, apply to companies</li>
+    </ul>
+</div>
+
+<!-- Section 4: Resume Builder -->
+<div class="section">
+    <h2>Resume Builder - Guidance & Structure</h2>
+    <p>A strong resume is your ticket to interviews. Include these sections:</p>
+
+    <h3>What to Include in Your Resume:</h3>
+    <div class="cards-grid">
+        {% for tip in resume_tips %}
+        <div class="card" style="background: linear-gradient(135deg, #dbeafe 0%, rgba(219, 234, 254, 0.5) 100%);">
+            <p style="color: var(--primary-blue);">✓ {{ tip }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h3 style="margin-top: 2rem;">Resume Tips:</h3>
+    <ul class="bullet-list">
+        <li><strong>Length:</strong> Keep it to 1 page (for internships) or 1-2 pages (for jobs)</li>
+        <li><strong>Format:</strong> Clear hierarchy, easy to read, professional fonts</li>
+        <li><strong>Content:</strong> Quantify your achievements - "Improved performance by 25%"</li>
+        <li><strong>Keywords:</strong> Use keywords from job description</li>
+        <li><strong>Spacing:</strong> Don't overcrowd, leave proper margins</li>
+        <li><strong>ATS Optimization:</strong> Use standard resume templates for ATS compatibility</li>
+        <li><strong>Proofreading:</strong> Zero typos or grammatical errors</li>
+    </ul>
+
+    <h3 style="margin-top: 2rem;">Resume Template Structure:</h3>
+    <div style="background: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+        <p style="margin: 0.5rem 0;"><strong>[YOUR NAME]</strong></p>
+        <p style="margin: 0.5rem 0;">Email | Phone | LinkedIn | GitHub</p>
+        <p style="margin: 0.5rem 0;"><strong>TECHNICAL SKILLS</strong> - Languages, Frameworks, Tools, Databases</p>
+        <p style="margin: 0.5rem 0;"><strong>EDUCATION</strong> - College, Degree, CGPA, Graduation Year</p>
+        <p style="margin: 0.5rem 0;"><strong>PROJECTS</strong> - 2-3 relevant projects with descriptions</p>
+        <p style="margin: 0.5rem 0;"><strong>INTERNSHIP EXPERIENCE</strong> - Company, Role, Duration, Achievements</p>
+        <p style="margin: 0.5rem 0;"><strong>CERTIFICATIONS</strong> - Online courses, workshops completed</p>
+        <p style="margin: 0.5rem 0;"><strong>ACHIEVEMENTS</strong> - Hackathons, competitions, awards</p>
+    </div>
+</div>
+
+<!-- Section 5: Job Search Resources -->
+<div class="section">
+    <h2>Essential Job Search Resources</h2>
+    <p>Tools and platforms to accelerate your job search journey:</p>
+    
+    <div class="cards-grid">
+        {% for resource in job_search_resources %}
+        <div class="card">
+            <h4 style="color: var(--primary-blue); margin-bottom: 0.5rem;">{{ resource.name }}</h4>
+            <p style="font-size: 0.85rem; color: var(--secondary-blue); margin-bottom: 0.5rem;"><strong>{{ resource.type }}</strong></p>
+            <p style="font-size: 0.85rem; margin-bottom: 1rem;">{{ resource.description }}</p>
+            <a href="{{ resource.url }}" target="_blank" class="card-link">Visit →</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Section 6: Structured Interview Preparation -->
+<div class="section" style="background: linear-gradient(135deg, #dbeafe 0%, rgba(219, 234, 254, 0.3) 100%); border-left: 4px solid var(--primary-blue);">
+    <h2>Interview Preparation Roadmap</h2>
+    <p>Follow these structured steps to prepare for technical interviews:</p>
+    
+    <div style="margin-top: 2rem;">
+        {% for tip in interview_tips %}
+        <div style="margin-bottom: 2rem; padding: 1rem; background: white; border-radius: 8px; border-left: 4px solid var(--primary-blue);">
+            <h4 style="color: var(--primary-blue); margin-bottom: 0.5rem;">{{ tip.title }}</h4>
+            <p style="margin: 0.5rem 0; color: var(--text-light);">{{ tip.description }}</p>
+            <p style="margin-top: 0.75rem;"><span style="background: var(--light-blue); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; color: var(--primary-blue);">⏱️ {{ tip.time }}</span></p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Section 7: Interview Preparation -->
+<div class="section">
+    <h2>Interview Preparation</h2>
+    
+    <h3>Types of Interviews:</h3>
+    <ul class="bullet-list">
+        <li><strong>Coding/DSA Round:</strong> Problem solving, data structures, algorithms</li>
+        <li><strong>Technical Round:</strong> System design, project discussions, technical depth</li>
+        <li><strong>HR Round:</strong> Behavioral, communication, fit for company culture</li>
+    </ul>
+
+    <h3 style="margin-top: 2rem;">Interview Tips:</h3>
+    <ul class="bullet-list">
+        <li>Practice coding problems on LeetCode and HackerRank</li>
+        <li>Prepare 2-minute introduction about yourself</li>
+        <li>Research the company and their tech stack thoroughly</li>
+        <li>Practice with mock interviews</li>
+        <li>Be ready to explain every project on your resume</li>
+        <li>Ask good questions about the role and company</li>
+        <li>Follow up with thank you email after interview</li>
+    </ul>
+</div>
+
+<!-- Job Search Strategy & Final Tips -->
+<div class="section" style="background: linear-gradient(135deg, var(--light-blue) 0%, rgba(219, 234, 254, 0.3) 100%); border-left: 4px solid var(--primary-blue);">
+    <h3>🎯 Complete Job Search Strategy</h3>
+    <p style="margin-bottom: 1.5rem;">A structured approach to land your dream job:</p>
+    
+    <h4 style="color: var(--primary-blue); margin-top: 1.5rem;">Phase 1: Foundation (1st Year)</h4>
+    <ul class="bullet-list">
+        <li>Master fundamentals: DSA, Core programming languages</li>
+        <li>Build 2-3 small projects and host on GitHub</li>
+        <li>Participate in coding contests (HackerRank, CodeChef)</li>
+        <li>Develop your GitHub profile with clean code</li>
+        <li>Start contributing to open-source projects</li>
+    </ul>
+
+    <h4 style="color: var(--primary-blue); margin-top: 1.5rem;">Phase 2: Specialization (2nd Year)</h4>
+    <ul class="bullet-list">
+        <li>Choose a specialization (Web Dev, ML, DevOps, etc.)</li>
+        <li>Apply for summer internships (even unpaid for learning)</li>
+        <li>Build 2-3 medium-scale projects in your domain</li>
+        <li>Get internship letters and learn practical skills</li>
+        <li>Network with professionals in your field</li>
+    </ul>
+
+    <h4 style="color: var(--primary-blue); margin-top: 1.5rem;">Phase 3: Advanced Development (3rd Year)</h4>
+    <ul class="bullet-list">
+        <li>Pursue paid internships in target companies</li>
+        <li>Build production-ready projects</li>
+        <li>Practice system design and architecture</li>
+        <li>Start preparing for technical interviews</li>
+        <li>Build strong LinkedIn network and presence</li>
+    </ul>
+
+    <h4 style="color: var(--primary-blue); margin-top: 1.5rem;">Phase 4: Job Search (3.5-4th Year)</h4>
+    <ul class="bullet-list">
+        <li>Intensive DSA and system design practice</li>
+        <li>Apply to 10+ companies per week</li>
+        <li>Use referrals and networking effectively</li>
+        <li>Clear coding interviews and HR rounds</li>
+        <li>Negotiate offer and finalize joining</li>
+    </ul>
+</div>
+
+<!-- Success Metrics & Final Checklist -->
+<div class="section">
+    <h2>✅ Job Application Checklist</h2>
+    <p>Before applying to any company, ensure you have:</p>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+        <div>
+            <h4 style="color: var(--primary-blue); margin-bottom: 1rem;">Documentation</h4>
+            <ul class="bullet-list">
+                <li>✓ Updated resume (1 page)</li>
+                <li>✓ LinkedIn profile with photo</li>
+                <li>✓ GitHub profile with 5+ projects</li>
+                <li>✓ Portfolio website (optional)</li>
+                <li>✓ Cover letter template</li>
+            </ul>
+        </div>
+        <div>
+            <h4 style="color: var(--primary-blue); margin-bottom: 1rem;">Technical Readiness</h4>
+            <ul class="bullet-list">
+                <li>✓ 150+ DSA problems solved</li>
+                <li>✓ 2-3 system design scenarios studied</li>
+                <li>✓ Mock interviews completed</li>
+                <li>✓ Company research done</li>
+                <li>✓ Interview stories prepared</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Expected Outcome & Next Steps -->
+<div class="section" style="background: linear-gradient(135deg, #dcfce7 0%, rgba(220, 252, 231, 0.3) 100%); border-left: 4px solid var(--success);">
+    <h3>🚀 Expected Outcomes & Growth Path</h3>
+    <p><strong>2 Months of Consistent Effort:</strong> You'll be ready for internship interviews</p>
+    <p><strong>6 Months of Preparation:</strong> You'll be job-ready with solid fundamentals and projects</p>
+    <p><strong>12 Months of Development:</strong> You'll have experience, strong portfolio, and interview confidence</p>
+    
+    <h4 style="color: var(--success); margin-top: 1.5rem;">Your Growth Journey:</h4>
+    <p>Internship (Learning) → First Full-Time Job (Entry Level) → Skill Specialization (Growth) → Senior Role (Leadership)</p>
+    
+    <p style="margin-top: 1rem; font-style: italic; color: var(--text-light);">
+        Remember: Every successful engineer started where you are. Consistency, learning, and persistence are key to success!
+    </p>
+</div>
+
+<script>
+// Store career data from Django context
+const careersData = {
+    {% for option in career_options %}
+    '{{ option.id }}': {
+        title: '{{ option.title }}',
+        category: '{{ option.category }}',
+        package: '{{ option.package }}',
+        description: '{{ option.description }}',
+        skills: {{ option.skills|safe }},
+        tools: {{ option.tools|safe }},
+        roles: {{ option.roles|safe }},
+        companies: {{ option.companies|safe }},
+    },
+    {% endfor %}
+};
+
+// Filter careers by category
+function filterCareers(category) {
+    const cards = document.querySelectorAll('.career-card');
+    const buttons = document.querySelectorAll('.filter-btn');
+    
+    // Update active button
+    buttons.forEach(btn => {
+        btn.style.background = 'white';
+        btn.style.color = 'var(--primary-blue)';
+    });
+    event.target.style.background = 'var(--primary-blue)';
+    event.target.style.color = 'white';
+    
+    // Filter cards
+    cards.forEach(card => {
+        if(category === 'all' || card.dataset.category === category) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+    
+    // Close details modal
+    closeCareerDetails();
+}
+
+// Show career details
+function showCareerDetails(element) {
+    const careerId = element.dataset.career;
+    const career = careersData[careerId];
+    
+    if(!career) return;
+    
+    // Update modal content
+    document.getElementById('careerTitle').textContent = career.title;
+    document.getElementById('careerPackage').textContent = career.package;
+    document.getElementById('careerDescription').textContent = career.description;
+    
+    // Update roles
+    const rolesList = document.getElementById('careerRoles');
+    rolesList.innerHTML = career.roles.map(role => `<li>${role}</li>`).join('');
+    
+    // Update companies
+    const companiesList = document.getElementById('careerCompanies');
+    companiesList.innerHTML = career.companies.map(company => `<li>${company}</li>`).join('');
+    
+    // Update skills (as badges)
+    const skillsDiv = document.getElementById('careerSkills');
+    skillsDiv.innerHTML = career.skills.map(skill => 
+        `<span style="background: var(--primary-blue); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">${skill}</span>`
+    ).join('');
+    
+    // Update tools (as badges)
+    const toolsDiv = document.getElementById('careerTools');
+    toolsDiv.innerHTML = career.tools.map(tool => 
+        `<span style="background: var(--primary-purple); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">${tool}</span>`
+    ).join('');
+    
+    // Show modal
+    document.getElementById('careerDetailsModal').style.display = 'block';
+    
+    // Highlight selected card
+    document.querySelectorAll('.career-card').forEach(card => {
+        card.style.borderColor = 'transparent';
+        card.style.backgroundColor = 'transparent';
+    });
+    element.style.borderColor = 'var(--primary-blue)';
+    element.style.backgroundColor = 'rgba(37, 99, 235, 0.05)';
+    
+    // Scroll to details
+    setTimeout(() => {
+        document.getElementById('careerDetailsModal').scrollIntoView({behavior: 'smooth', block: 'start'});
+    }, 100);
+}
+
+// Close career details
+function closeCareerDetails() {
+    document.getElementById('careerDetailsModal').style.display = 'none';
+    document.querySelectorAll('.career-card').forEach(card => {
+        card.style.borderColor = 'transparent';
+        card.style.backgroundColor = 'transparent';
+    });
+}
+</script>
+{% endblock %}

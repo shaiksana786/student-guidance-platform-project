@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Student Guidance Platform{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1> Welcome to Student Guidance Platform</h1>
+    <p>Your comprehensive guide to engineering career planning</p>
+    {% if student %}
+    <p style="margin-top: 1rem; font-size: 1rem;">{{ student.get_branch_display }} | {{ student.get_year_display }}</p>
+    {% endif %}
+</div>
+
+<div class="section-container">
+    <div class="modules-grid">
+        {% for module in modules %}
+        <div class="module-card">
+            <div class="module-icon">{{ module.icon }}</div>
+            <h3>{{ module.name }}</h3>
+            <p>Explore detailed guidance and resources</p>
+            <a href="{% url module.url %}">Explore →</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="section-container" style="text-align: center;">
+    <p style="color: var(--text-light); font-size: 1.05rem;">
+        Start your journey with any module below to gain comprehensive knowledge about coding,
+        projects, hackathons, career opportunities, and semester-wise roadmaps for your engineering degree.
+    </p>
+</div>
+{% endblock %}

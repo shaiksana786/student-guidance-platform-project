@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block title %}Hackathons - Student Guidance Platform{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1> Hackathons & Competitions</h1>
+    <p>Discover the world of hackathons and how they accelerate your career</p>
+</div>
+
+<!-- Section 1: What is a Hackathon -->
+<div class="section">
+    <h2>What is a Hackathon?</h2>
+    <p>
+        A hackathon is a time-limited event (usually 24-48 hours) where students and professionals collaborate to
+        rapidly develop solutions to a given problem or build innovative projects. It's a marathon of coding, creativity,
+        and innovation!
+    </p>
+    <ul class="bullet-list">
+        <li>Teams of 2-4 members work together</li>
+        <li>Time-bound competition (24-48 hours)</li>
+        <li>Mentors and resources provided</li>
+        <li>Prizes, certificates, and recognition</li>
+        <li>Focus on innovation and rapid prototyping</li>
+        <li>Networking with industry professionals</li>
+    </ul>
+</div>
+
+<!-- Section 2: Why Hackathons Matter -->
+<div class="section">
+    <h2>Why Hackathons are Important</h2>
+    <div class="cards-grid">
+        {% for benefit in hackathon_benefits %}
+        <div class="card" style="background: linear-gradient(135deg, #dbeafe 0%, rgba(219, 234, 254, 0.5) 100%);">
+            <p style="color: var(--primary-blue); font-weight: 600;">✓ {{ benefit }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Section 3: How Hackathons Help Career -->
+<div class="section">
+    <h2>How Hackathons Help in Your Career</h2>
+    <h3>Direct Career Benefits:</h3>
+    <ul class="bullet-list">
+        {% for impact in career_impact %}
+        <li>{{ impact }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3 style="margin-top: 2rem;">Types of Hackathons to Participate In:</h3>
+    <ul class="bullet-list">
+        <li><strong>Campus Hackathons:</strong> Organized by your college or department</li>
+        <li><strong>Regional Hackathons:</strong> Multiple colleges in your region compete</li>
+        <li><strong>National Hackathons:</strong> All-India competitions with large prizes</li>
+        <li><strong>Corporate Hackathons:</strong> Hosted by companies like Google, Microsoft, Amazon</li>
+        <li><strong>Themed Hackathons:</strong> Focus on specific domains (AI/ML, IoT, Blockchain, etc.)</li>
+        <li><strong>Online Hackathons:</strong> Participate from anywhere in the world</li>
+    </ul>
+</div>
+
+<!-- Section 4: Certifications & Courses -->
+<div class="section">
+    <h2>Certifications & Courses with Resume Value</h2>
+    <p>Build your skills with industry-recognized certifications from leading platforms:</p>
+    
+    <div class="cards-grid">
+        {% for cert in certifications %}
+        <div class="card">
+            <h4>{{ cert.name }}</h4>
+            <p>{{ cert.description }}</p>
+            <a href="{{ cert.link }}" target="_blank" class="card-link">Explore →</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Section 5: Hackathon Timeline -->
+<div class="section" style="background: linear-gradient(135deg, var(--light-blue) 0%, rgba(219, 234, 254, 0.3) 100%); border-left: 4px solid var(--primary-blue);">
+    <h3>📅 Recommended Hackathon Participation Timeline</h3>
+    
+    <div style="margin-top: 1.5rem;">
+        <p style="margin: 1rem 0;"><strong>1st Year:</strong> Participate in campus/local hackathons, focus on learning and building networks</p>
+        <p style="margin: 1rem 0;"><strong>2nd Year:</strong> Participate in regional hackathons, try to win or make it to final rounds</p>
+        <p style="margin: 1rem 0;"><strong>3rd Year:</strong> Participate in national and corporate hackathons, aim for prizes and internship offers</p>
+        <p style="margin: 1rem 0;"><strong>4th Year:</strong> Focus on quality over quantity, prepare for placements, mentor juniors</p>
+    </div>
+</div>
+
+<!-- Section 6: How to Prepare -->
+<div class="section">
+    <h2>How to Prepare for Hackathons</h2>
+    
+    <h3>Technical Preparation:</h3>
+    <ul class="bullet-list">
+        <li>Master at least one programming language completely</li>
+        <li>Learn relevant frameworks and libraries (React, Django, FastAPI, etc.)</li>
+        <li>Practice quick problem solving and coding challenges</li>
+        <li>Understand APIs and how to integrate them in projects</li>
+        <li>Learn version control (Git/GitHub)</li>
+        <li>Know basic UI/UX principles for frontend</li>
+    </ul>
+
+    <h3 style="margin-top: 2rem;">Soft Skills:</h3>
+    <ul class="bullet-list">
+        <li>Communication and teamwork</li>
+        <li>Time management during hackathon</li>
+        <li>Quick decision making</li>
+        <li>Presentation and pitching skills</li>
+        <li>Handling stress and working under pressure</li>
+    </ul>
+
+    <h3 style="margin-top: 2rem;">What to Bring:</h3>
+    <ul class="bullet-list">
+        <li>Laptop with necessary software already installed</li>
+        <li>Power bank and chargers</li>
+        <li>ID and registration documents</li>
+        <li>Comfortable clothes and extra outfits</li>
+        <li>Toiletries and medications</li>
+        <li>Snacks and water bottle</li>
+    </ul>
+</div>
+
+<!-- Finding Hackathons -->
+<div class="section">
+    <h2>Where to Find Hackathons</h2>
+    <ul class="bullet-list">
+        <li><strong>DevFolio:</strong> https://devfolio.co - India's largest hackathon platform</li>
+        <li><strong>Hackathon.com:</strong> Global hackathon listings</li>
+        <li><strong>MLH (Major League Hacking):</strong> Official collegiate hackathon circuit</li>
+        <li><strong>Company Career Pages:</strong> Check Google, Microsoft, Amazon for hackathons</li>
+        <li><strong>College Portal:</strong> Check with your college's technical clubs</li>
+        <li><strong>LinkedIn:</strong> Follow hackathon announcements</li>
+    </ul>
+</div>
+
+<!-- Success Stories -->
+<div class="section" style="background: linear-gradient(135deg, #dcfce7 0%, rgba(220, 252, 231, 0.3) 100%); border-left: 4px solid var(--success);">
+    <h3>🏆 Real Stories: Hackathons Changing Lives</h3>
+    <p>
+        Many students have launched their careers through hackathons:
+    </p>
+    <ul class="bullet-list">
+        <li>Won hackathon → Got internship → Full-time job offer</li>
+        <li>Built a project at hackathon → Started own startup</li>
+        <li>Met co-founders at hackathon → Built successful company</li>
+        <li>Showcased skills at hackathon → Got recruited by tech companies</li>
+    </ul>
+    <p style="margin-top: 1rem;">Your hackathon journey could be one of them! </p>
+</div>
+{% endblock %}

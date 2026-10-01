@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block title %}Coding Awareness - Student Guidance Platform{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1> Coding Awareness</h1>
+    <p>Everything you need to know about programming and coding fundamentals</p>
+</div>
+
+<!-- Section 1: What is Coding -->
+<div class="section">
+    <h2>What is Coding?</h2>
+    <p>
+        Coding is the process of writing instructions in a programming language that a computer can understand and execute.
+        It's the foundation of software development, allowing you to create applications, websites, and solve complex problems
+        by breaking them down into logical steps that computers can process.
+    </p>
+    <p>
+        Think of coding as giving precise instructions to a computer, similar to how you would give directions to someone.
+        Each line of code tells the computer exactly what to do.
+    </p>
+</div>
+
+<!-- Section 2: Why Coding is Important -->
+<div class="section">
+    <h2>Why Coding is Important</h2>
+    <ul class="bullet-list">
+        <li><strong>Job Opportunities:</strong> Coding skills are in high demand across industries with excellent salary prospects</li>
+        <li><strong>Logic & Problem Solving:</strong> Develops structured thinking and ability to solve complex problems</li>
+        <li><strong>Creativity:</strong> Allows you to build applications and bring ideas to life</li>
+        <li><strong>Career Growth:</strong> Opens doors to roles like Software Developer, Data Scientist, ML Engineer, etc.</li>
+        <li><strong>Digital Literacy:</strong> Essential skill for the 21st century and future of work</li>
+        <li><strong>Innovation:</strong> Enables you to create tools and solutions that can impact millions</li>
+    </ul>
+</div>
+
+<!-- Section 3: Free Coding Platforms for Daily Practice -->
+<div class="section">
+    <h2>Free Coding Platforms for Daily Practice</h2>
+    <p>Practice regularly on these platforms to sharpen your coding skills:</p>
+    
+    <div class="cards-grid">
+        {% for platform in platforms %}
+        <div class="card">
+            <h4>{{ platform.name }}</h4>
+            <p>{{ platform.description }}</p>
+            <a href="{{ platform.link }}" target="_blank" class="card-link">Visit Platform →</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Section 4: Programming Language Comparison -->
+<div class="section">
+    <h2>Which Programming Language is Better & Why</h2>
+    <p>Different languages serve different purposes. Here's a comparison:</p>
+    
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Language</th>
+                    <th>Difficulty Level</th>
+                    <th>Best For</th>
+                    <th>Popularity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lang in language_comparison %}
+                <tr>
+                    <td><strong>{{ lang.language }}</strong></td>
+                    <td>{{ lang.difficulty }}</td>
+                    <td>{{ lang.use_case }}</td>
+                    <td>{{ lang.popularity }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Section 5: Easy vs Hard Languages -->
+<div class="section">
+    <h2>Easy vs Hard Languages</h2>
+    
+    <h3>Easy Languages (Best for Beginners)</h3>
+    <div class="cards-grid">
+        {% for lang in easy_languages %}
+        <div class="card" style="background: linear-gradient(135deg, #dcfce7 0%, rgba(220, 252, 231, 0.5) 100%); border: 1px solid #86efac;">
+            <h4 style="color: #166534;">{{ lang }}</h4>
+            <p>Great starting point for learning fundamentals</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h3 style="margin-top: 2rem;">Moderate Languages</h3>
+    <div class="cards-grid">
+        {% for lang in moderate_languages %}
+        <div class="card" style="background: linear-gradient(135deg, #fef3c7 0%, rgba(254, 243, 199, 0.5) 100%); border: 1px solid #fcd34d;">
+            <h4 style="color: #92400e;">{{ lang }}</h4>
+            <p>Good for advanced projects and specialization</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h3 style="margin-top: 2rem;">Hard Languages</h3>
+    <div class="cards-grid">
+        {% for lang in hard_languages %}
+        <div class="card" style="background: linear-gradient(135deg, #fee2e2 0%, rgba(254, 226, 226, 0.5) 100%); border: 1px solid #fca5a5;">
+            <h4 style="color: #991b1b;">{{ lang }}</h4>
+            <p>Advanced topics, requires strong foundation</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Section 6: What is DSA & Why It Is Important -->
+<div class="section">
+    <h2>What is DSA & Why It Is Important</h2>
+    
+    <h3>Data Structures and Algorithms (DSA) Explained</h3>
+    <p>
+        DSA is the study of how to organize, store, and retrieve data efficiently, and how to solve problems using
+        step-by-step procedures. It's the backbone of competitive programming and technical interviews.
+    </p>
+
+    <h3>Why DSA is Critical for Your Career:</h3>
+    <ul class="bullet-list">
+        <li><strong>Technical Interviews:</strong> 90% of software company interviews focus on DSA questions</li>
+        <li><strong>Problem Solving:</strong> Teaches how to write efficient code that doesn't crash on large inputs</li>
+        <li><strong>Career Prospects:</strong> Strong DSA skills lead to better job offers and salary</li>
+        <li><strong>Optimization:</strong> Learn to write code that runs faster and uses less memory</li>
+        <li><strong>Foundation:</strong> Essential for ML, Web Development, and System Design</li>
+        <li><strong>Competitive Programming:</strong> Participate in contests and win prizes (Codeforces, CodeChef)</li>
+    </ul>
+
+    <h3>What You Should Learn:</h3>
+    <ul class="bullet-list">
+        <li>Basic Data Structures: Array, Linked List, Stack, Queue</li>
+        <li>Advanced Data Structures: Tree, Graph, Heap, Hash Table</li>
+        <li>Sorting Algorithms: Bubble Sort, Merge Sort, Quick Sort, Heap Sort</li>
+        <li>Searching Algorithms: Linear Search, Binary Search</li>
+        <li>Graph Algorithms: BFS, DFS, Dijkstra, Floyd-Warshall</li>
+        <li>Dynamic Programming: Optimization techniques for complex problems</li>
+    </ul>
+</div>
+
+<div class="section" style="background: linear-gradient(135deg, var(--light-blue) 0%, rgba(219, 234, 254, 0.3) 100%); border-left: 4px solid var(--primary-blue);">
+    <h3>🎯 Your Coding Journey</h3>
+    <p style="margin: 1rem 0;"><strong>Month 1-2:</strong> Learn a programming language (Python or C++)</p>
+    <p style="margin: 1rem 0;"><strong>Month 3-6:</strong> Master DSA fundamentals and solve basic problems</p>
+    <p style="margin: 1rem 0;"><strong>Month 7-12:</strong> Practice advanced problems on competitive platforms</p>
+    <p style="margin: 1rem 0;"><strong>Month 13+:</strong> Build projects integrating coding and DSA skills</p>
+</div>
+{% endblock %}

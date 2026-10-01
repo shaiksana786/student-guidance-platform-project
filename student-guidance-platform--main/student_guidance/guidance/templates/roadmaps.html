@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+
+{% block title %}Branch-wise Roadmaps - Student Guidance Platform{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>🗺️ Branch-wise Roadmaps</h1>
+    <p>Comprehensive 4-year semester-wise guidance for all engineering branches</p>
+</div>
+
+<!-- Section: Branch Selection -->
+<div class="section">
+    <h2>Select Your Branch</h2>
+    <div style="margin: 2rem 0;">
+        <select id="branchSelect" onchange="window.location.href='?branch=' + this.value" 
+                style="padding: 0.75rem 1rem; font-size: 1rem; border: 2px solid var(--primary-blue); border-radius: 6px; min-width: 300px;">
+            {% for branch in branches %}
+            <option value="{{ branch }}" {% if branch == selected_branch %}selected{% endif %}>
+                {{ branch }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+
+<!-- Roadmap Content -->
+<div class="section">
+    <h2>{{ roadmap.name }} - 4-Year Roadmap</h2>
+    <p style="margin-bottom: 2rem; color: var(--text-light);">
+        Follow this structured roadmap to excel in your branch. Each semester builds upon previous knowledge
+        to prepare you for placements and a successful career.
+    </p>
+
+    <div class="roadmap-container">
+        {% for semester in roadmap.semesters %}
+        <div class="roadmap-section">
+            <h3>{{ semester.semester }}</h3>
+            
+            <h4 style="color: var(--dark-blue); margin-top: 1rem; margin-bottom: 0.75rem;">📚 Core Courses</h4>
+            <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                {% for course in semester.courses %}
+                <li style="margin-bottom: 0.5rem;">{{ course }}</li>
+                {% endfor %}
+            </ul>
+
+            <h4 style="color: var(--dark-blue); margin-bottom: 0.75rem;">🎯 Skills to Develop</h4>
+            <div class="roadmap-skills" style="margin-bottom: 1rem;">
+                {% for skill in semester.skills %}
+                <div class="skill-badge">{{ skill }}</div>
+                {% endfor %}
+            </div>
+
+            <h4 style="color: var(--dark-blue); margin-bottom: 0.75rem;">🛠️ Tools & Technologies</h4>
+            <div class="roadmap-skills" style="margin-bottom: 1rem;">
+                {% for tool in semester.tools %}
+                <div class="skill-badge" style="background: linear-gradient(135deg, #dbeafe 0%, rgba(219, 234, 254, 0.5) 100%); border-color: var(--primary-blue);">{{ tool }}</div>
+                {% endfor %}
+            </div>
+
+            <h4 style="color: var(--dark-blue); margin-bottom: 0.75rem;">💡 Practical Projects</h4>
+            <ul style="margin-left: 1.5rem;">
+                {% for project in semester.projects %}
+                <li style="margin-bottom: 0.5rem;">{{ project }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Additional Guidance -->
+<div class="section">
+    <h2>Tips for Success in {{ roadmap.name }}</h2>
+    
+    <h3>Semester-wise Action Plan:</h3>
+    <ul class="bullet-list">
+        <li><strong>During Semesters 1-2:</strong> Master fundamentals, build strong foundation, participate in college clubs</li>
+        <li><strong>During Semesters 3-4:</strong> Choose specialization area, take on larger projects, apply for internships</li>
+        <li><strong>During Semesters 5-6:</strong> Do relevant internships, contribute to open-source, enhance skills</li>
+        <li><strong>During Semesters 7-8:</strong> Focus on placements, prepare interview rounds, mentor juniors</li>
+    </ul>
+
+    <h3 style="margin-top: 2rem;">Beyond Classroom:</h3>
+    <ul class="bullet-list">
+        <li>Participate in departmental clubs and projects</li>
+        <li>Attend workshops and seminars by industry experts</li>
+        <li>Contribute to open-source projects relevant to your branch</li>
+        <li>Build a portfolio of projects aligned with your branch</li>
+        <li>Network with seniors and industry professionals</li>
+        <li>Take online certifications to enhance your profile</li>
+    </ul>
+
+    <h3 style="margin-top: 2rem;">Preparation for Placements:</h3>
+    <ul class="bullet-list">
+        <li>Start preparation from 3rd year onwards</li>
+        <li>Practice interview questions relevant to your branch</li>
+        <li>Build projects that demonstrate your branch expertise</li>
+        <li>Get strong recommendation letters from professors</li>
+        <li>Maintain good CGPA (above 7.0)</li>
+        <li>Update resume regularly with achievements</li>
+    </ul>
+</div>
+
+<!-- Branch Comparison (if applicable) -->
+<div class="section" style="background: linear-gradient(135deg, var(--light-blue) 0%, rgba(219, 234, 254, 0.3) 100%); border-left: 4px solid var(--primary-blue);">
+    <h3>📊 Career Prospects for {{ selected_branch }}</h3>
+    <p style="margin: 1rem 0;">
+        Graduates from your branch have excellent career prospects in both government and private sectors.
+        With dedication and hard work following this roadmap, you'll be well-prepared for:
+    </p>
+    <ul class="bullet-list">
+        <li>Campus Placements at top companies</li>
+        <li>Government jobs (PSU placements)</li>
+        <li>Higher studies (M.Tech, MBA)</li>
+        <li>Entrepreneurship and startups</li>
+        <li>Research and Development roles</li>
+    </ul>
+</div>
+
+<!-- Resources -->
+<div class="section">
+    <h2>Learning Resources by Semester</h2>
+    <p style="margin-bottom: 1.5rem;">
+        Recommended platforms and resources to support your learning journey:
+    </p>
+    
+    <div class="cards-grid">
+        <div class="card">
+            <h4>Online Learning Platforms</h4>
+            <ul style="margin-left: 1rem; font-size: 0.9rem;">
+                <li>Coursera</li>
+                <li>Udemy</li>
+                <li>NPTEL</li>
+                <li>edX</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Coding Practice</h4>
+            <ul style="margin-left: 1rem; font-size: 0.9rem;">
+                <li>LeetCode</li>
+                <li>HackerRank</li>
+                <li>GeeksforGeeks</li>
+                <li>CodeChef</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Development Tools</h4>
+            <ul style="margin-left: 1rem; font-size: 0.9rem;">
+                <li>GitHub</li>
+                <li>VS Code</li>
+                <li>Docker</li>
+                <li>Git</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Documentation & References</h4>
+            <ul style="margin-left: 1rem; font-size: 0.9rem;">
+                <li>Official Documentation</li>
+                <li>Stack Overflow</li>
+                <li>MDN Web Docs</li>
+                <li>Dev.to</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Success Stories -->
+<div class="section" style="background: linear-gradient(135deg, #dcfce7 0%, rgba(220, 252, 231, 0.3) 100%); border-left: 4px solid var(--success);">>
+</div>
+{% endblock %}
