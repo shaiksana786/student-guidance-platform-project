@@ -1,10 +1,12 @@
 #!/bin/bash
-set -e
 
-cd student-guidance-platform--main/student_guidance
+set -e
 
 echo "Installing dependencies..."
 pip install -r requirements.txt
+
+echo "Running migrations..."
+python manage.py migrate
 
 echo "Collecting static files..."
 python manage.py collectstatic --noinput
